@@ -9,5 +9,5 @@ export type Timestamp = number;
 
 export interface WateringSequence {
   requestedAt: Timestamp;
-  finishedAt: Timestamp;
+  startedAt: Timestamp;
 }

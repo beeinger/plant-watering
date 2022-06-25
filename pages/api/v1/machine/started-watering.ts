@@ -15,7 +15,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       shouldWater: false,
       wateringHistory: db.util.append({
         requestedAt: shouldWater,
-        finishedAt: Date.now(),
+        startedAt: Date.now(),
       } as any),
     },
     "0"
