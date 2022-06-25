@@ -5,10 +5,10 @@
 
 const char *ssid = "";
 const char *password = "";
-const String baseURL = "http://plant-watering.beeinger.dev/api/v1/machine/";
-const int WATERING_TIME = 20*1000;
+const String baseURL = "https://plant-watering.beeinger.dev/api/v1/machine/";
+const int WATERING_TIME = 10*1000;
 const int PING_INTERVAL = 10*1000;
-WiFiClient client;
+WiFiClientSecure client;
 HTTPClient http;
 
 bool shouldWaterThePlant(){
@@ -21,7 +21,7 @@ bool shouldWaterThePlant(){
   deserializeJson(doc, http.getStream());
 
   bool shouldWater = doc["shouldWater"].as<bool>();
-  // TODO: try to move this line above
+  // TODO: move this line above and check if it works
   http.end();
   Serial.println(shouldWater);
   
@@ -40,9 +40,9 @@ void pingStartup(){
   ping("startup");
 }
 
-void pingWateringDone(){
-  Serial.println("Pinging watering done");
-  ping("done-watering");
+void pingWateringStarted(){
+  Serial.println("Pinging watering started");
+  ping("started-watering");
 }
 
 void setup() {
@@ -56,6 +56,7 @@ void setup() {
   Serial.println("");
   Serial.println("WiFi connected");
   Serial.println(WiFi.localIP());
+  client.setInsecure();
   pingStartup();
   
   pinMode(PUMP, OUTPUT);
@@ -64,10 +65,10 @@ void setup() {
 
 void loop() {
   if(shouldWaterThePlant()){
+    pingWateringStarted();
     digitalWrite(PUMP, LOW);
     delay(WATERING_TIME);
     digitalWrite(PUMP, HIGH);
-    pingWateringDone();
   }
   delay(PING_INTERVAL);
 }

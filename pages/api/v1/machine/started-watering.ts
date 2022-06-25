@@ -7,8 +7,8 @@ const deta = Deta(process.env.DETA_PROJECT_KEY),
   db = deta.Base(process.env.DETA_BASE_NAME);
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  const result = (await db.get("0")) as unknown as Machine,
-    shouldWater = result?.shouldWater;
+  const machine = (await db.get("0")) as unknown as Machine,
+    shouldWater = machine?.shouldWater;
 
   await db.update(
     {
