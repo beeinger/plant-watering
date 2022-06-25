@@ -10,7 +10,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const machine: Machine = {
     shouldWater: false,
     startupHistory: [],
-    pingHistory: [],
+    lastPing: null,
     wateringHistory: [],
   };
   let status = 200;

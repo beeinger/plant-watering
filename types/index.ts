@@ -1,7 +1,7 @@
 export interface Machine {
   shouldWater: Timestamp | false;
+  lastPing: Timestamp;
   startupHistory: Timestamp[];
-  pingHistory: Timestamp[];
   wateringHistory: WateringSequence[];
 }
 

@@ -10,11 +10,9 @@ export default async (req: NextApiRequest, res: NextApiResponse<Response>) => {
   const machine = (await db.get("0")) as unknown as Machine,
     shouldWater = machine?.shouldWater ? true : false;
 
-  console.log(machine);
-
   await db.update(
     {
-      pingHistory: db.util.append(Date.now()),
+      lastPing: Date.now(),
     },
     "0"
   );
