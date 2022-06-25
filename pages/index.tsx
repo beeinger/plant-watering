@@ -83,7 +83,12 @@ export default function Index() {
               : "No pings yet"}
           </div>
           <div
-            style={{ display: "flex", alignItems: "center", cursor: "pointer" }}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              cursor: "pointer",
+              userSelect: "none",
+            }}
             onClick={() => setShowStartupHistory((prev) => !prev)}
           >
             Machine started up {data?.startupHistory.length} times{" "}
@@ -97,7 +102,12 @@ export default function Index() {
             </div>
           )}
           <div
-            style={{ display: "flex", alignItems: "center", cursor: "pointer" }}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              cursor: "pointer",
+              userSelect: "none",
+            }}
             onClick={() => setShowWateringHistory((prev) => !prev)}
           >
             Machine watered the plant {data?.wateringHistory.length} times{" "}
